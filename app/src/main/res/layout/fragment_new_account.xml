@@ -126,7 +126,7 @@
         android:fontFamily="@font/antic_didone"
         android:textStyle="bold">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtConformPassword"
+            android:id="@+id/txtConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/antic_didone"

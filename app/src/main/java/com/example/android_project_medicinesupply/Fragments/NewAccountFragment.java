@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import com.example.android_project_medicinesupply.R;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class NewAccountFragment extends Fragment {
 
     @Override
@@ -38,10 +41,15 @@ public class NewAccountFragment extends Fragment {
                 TextInputEditText txtTelephone=view.findViewById(R.id.txtTelephone);
                 TextInputEditText txtEmail=view.findViewById(R.id.txtEmail);
                 TextInputEditText txtPassword=view.findViewById(R.id.txtPassword);
-                TextInputEditText txtConformPassword=view.findViewById(R.id.txtConformPassword);
+                TextInputEditText txtConfirmPassword=view.findViewById(R.id.txtConfirmPassword);
                 if(!validateTelephone(txtTelephone.getText().toString())){
                     Toast toast=Toast.makeText(getContext(), R.string.invalid_telephone,Toast.LENGTH_LONG);
+                }else if(!validateEmail(txtEmail.getText().toString())){
+                    Toast toast=Toast.makeText(getContext(), R.string.invalid_email,Toast.LENGTH_LONG);
+                }else if(txtPassword.getText().toString()!=txtConfirmPassword.getText().toString()){
+                    Toast toast=Toast.makeText(getContext(), R.string.invalid_password,Toast.LENGTH_LONG);
                 }
+
             }
         });
         return view;
@@ -57,6 +65,13 @@ public class NewAccountFragment extends Fragment {
             }
         }
         return true;
+    }
+
+    private boolean validateEmail(String email){
+        final String regex="^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pattern=Pattern.compile(regex);
+        Matcher matcher=pattern.matcher(email);
+        return matcher.matches();
     }
 
 
