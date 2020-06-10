@@ -19,4 +19,13 @@ public class LoginActivity extends AppCompatActivity {
         transaction.add(R.id.fragmentFrame, new LoginFragment());
         transaction.commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().getBackStackEntryCount() != 0) {
+            getSupportFragmentManager().popBackStackImmediate();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

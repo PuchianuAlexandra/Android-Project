@@ -47,6 +47,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragmentFrame, new NewAccountFragment());
+                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
@@ -54,5 +55,5 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-    
+
 }

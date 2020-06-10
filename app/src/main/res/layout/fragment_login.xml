@@ -29,7 +29,8 @@
             android:fontFamily="@font/antic_didone"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:textColor="@color/colorPrimaryDark"
+            android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
