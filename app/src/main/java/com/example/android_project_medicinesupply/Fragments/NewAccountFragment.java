@@ -1,5 +1,6 @@
 package com.example.android_project_medicinesupply.Fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.android_project_medicinesupply.Database.SaveUserAsync;
+import com.example.android_project_medicinesupply.Database.User;
 import com.example.android_project_medicinesupply.R;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -48,6 +51,13 @@ public class NewAccountFragment extends Fragment {
                     Toast toast=Toast.makeText(getContext(), R.string.invalid_email,Toast.LENGTH_LONG);
                 }else if(txtPassword.getText().toString()!=txtConfirmPassword.getText().toString()){
                     Toast toast=Toast.makeText(getContext(), R.string.invalid_password,Toast.LENGTH_LONG);
+                }else{
+                    User user=new User(txtName.getText().toString(),txtEmail.getText().toString(),txtPassword.getText().toString(),txtTelephone.getText().toString());
+                    AsyncTask<User,Void,Void> asyncTask=new SaveUserAsync().execute(user);
+                    Toast toast=Toast.makeText(getContext(), R.string.account_created,Toast.LENGTH_LONG);
+                    if(getActivity().getSupportFragmentManager().getBackStackEntryCount() != 0) {
+                        getActivity().getSupportFragmentManager().popBackStackImmediate();
+                    }
                 }
 
             }

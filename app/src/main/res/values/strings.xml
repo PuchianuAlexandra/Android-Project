@@ -16,4 +16,5 @@
     <string name="invalid_telephone">Invalid telephone!</string>
     <string name="invalid_email">Invalid Email!</string>
     <string name="invalid_password">Invalid password!</string>
+    <string name="account_created">Account created!</string>
 </resources>
