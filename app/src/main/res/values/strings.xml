@@ -6,4 +6,8 @@
     <string name="button_login">Login</string>
     <string name="button_create_account">Create account</string>
     <string name="button_forgot_password">I forgot my password</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_telephone">Telephone</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="button_cancel">Cancel</string>
 </resources>
