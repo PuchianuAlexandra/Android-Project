@@ -2,10 +2,14 @@ package com.example.android_project_medicinesupply.Fragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +24,9 @@ import java.util.regex.Pattern;
 
 public class NewAccountFragment extends Fragment {
 
+    TextInputEditText txtPassword;
+    TextInputEditText txtConfirmPassword;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -27,6 +34,9 @@ public class NewAccountFragment extends Fragment {
         final View view=inflater.inflate(R.layout.fragment_new_account, container, false);
         Button btnCreateAccount=view.findViewById(R.id.btnCreateAccount);
         Button btnCancel=view.findViewById(R.id.btnCancel);
+        CheckBox seePassword=view.findViewById(R.id.checkSeePassword);
+        txtPassword=view.findViewById(R.id.txtPassword);
+        txtConfirmPassword=view.findViewById(R.id.txtConfirmPassword);
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,9 +53,7 @@ public class NewAccountFragment extends Fragment {
                 TextInputEditText txtName=view.findViewById(R.id.txtName);
                 TextInputEditText txtTelephone=view.findViewById(R.id.txtTelephone);
                 TextInputEditText txtEmail=view.findViewById(R.id.txtEmail);
-                TextInputEditText txtPassword=view.findViewById(R.id.txtPassword);
-                TextInputEditText txtConfirmPassword=view.findViewById(R.id.txtConfirmPassword);
-                if(!validateTelephone(txtTelephone.getText().toString())){
+               if(!validateTelephone(txtTelephone.getText().toString())){
                     Toast toast=Toast.makeText(getContext(), R.string.invalid_telephone,Toast.LENGTH_LONG);
                 }else if(!validateEmail(txtEmail.getText().toString())){
                     Toast toast=Toast.makeText(getContext(), R.string.invalid_email,Toast.LENGTH_LONG);
@@ -60,6 +68,19 @@ public class NewAccountFragment extends Fragment {
                     }
                 }
 
+            }
+        });
+
+        seePassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    txtPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    txtConfirmPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    txtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    txtConfirmPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
             }
         });
         return view;
