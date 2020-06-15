@@ -26,6 +26,7 @@ public class User {
     }
 
     public User() {
+        id = 0;
         name = "";
         email = "";
         password = "";

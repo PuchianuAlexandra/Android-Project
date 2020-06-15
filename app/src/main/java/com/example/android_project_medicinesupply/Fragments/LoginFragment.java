@@ -1,5 +1,6 @@
 package com.example.android_project_medicinesupply.Fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -9,18 +10,26 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.android_project_medicinesupply.Database.SaveUserAsync;
+import com.example.android_project_medicinesupply.Database.SelectUserAsync;
+import com.example.android_project_medicinesupply.Database.User;
 import com.example.android_project_medicinesupply.R;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.concurrent.ExecutionException;
+
 public class LoginFragment extends Fragment {
 
-    CheckBox checkSeePassword;
-    TextInputEditText txtPassword;
-    Button btnAddAccount;
+    private CheckBox checkSeePassword;
+    private TextInputEditText txtEmail;
+    private TextInputEditText txtPassword;
+    private Button btnAddAccount;
+    private Button btnLogIn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,7 +43,7 @@ public class LoginFragment extends Fragment {
         checkSeePassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     txtPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else {
                     txtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
@@ -52,8 +61,31 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        btnLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User user = new User();
+                AsyncTask<String, Void, User> asyncTask = new SelectUserAsync().execute(txtEmail.getText().toString(), txtPassword.getText().toString());
+
+                try {
+                    user = asyncTask.get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                if (user.getId() == 0) {
+                    Toast toast = Toast.makeText(getContext(), R.string.no_user_found, Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    Toast toast = Toast.makeText(getContext(), user.getName() , Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+
         return view;
     }
-
 
 }
