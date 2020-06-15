@@ -82,7 +82,7 @@
         app:layout_constraintTop_toBottomOf="@id/checkSeePassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnCreateAccount"
+        app:layout_constraintBottom_toTopOf="@id/btnAddAccount"
         android:background="@color/colorAccent"
         android:fontFamily="@font/antic_didone"
         android:textSize="22sp"
@@ -92,7 +92,7 @@
         android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/btnCreateAccount"
+        android:id="@+id/btnAddAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/btnLogin"
@@ -111,7 +111,7 @@
         android:id="@+id/btnForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/btnCreateAccount"
+        app:layout_constraintTop_toBottomOf="@id/btnAddAccount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -17,4 +17,5 @@
     <string name="invalid_email">Invalid Email!</string>
     <string name="invalid_password">Invalid password!</string>
     <string name="account_created">Account created!</string>
+    <string name="fill_all_boxes">You have to fill all the boxes!</string>
 </resources>

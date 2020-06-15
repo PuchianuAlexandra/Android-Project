@@ -20,7 +20,7 @@ public class AppController extends Application {
         super.onCreate();
 
         controller = this;
-        database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "database").build();
+        database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "app_database").build();
     }
 
     public AppDatabase getDatabaseInstance() {

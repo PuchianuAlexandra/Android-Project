@@ -41,7 +41,7 @@ public class NewAccountFragment extends Fragment {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getActivity().getSupportFragmentManager().getBackStackEntryCount() != 0) {
+                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() != 0) {
                     getActivity().getSupportFragmentManager().popBackStackImmediate();
                 }
             }
@@ -50,20 +50,30 @@ public class NewAccountFragment extends Fragment {
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextInputEditText txtName=view.findViewById(R.id.txtName);
-                TextInputEditText txtTelephone=view.findViewById(R.id.txtTelephone);
-                TextInputEditText txtEmail=view.findViewById(R.id.txtEmail);
-               if(!validateTelephone(txtTelephone.getText().toString())){
-                    Toast toast=Toast.makeText(getContext(), R.string.invalid_telephone,Toast.LENGTH_LONG);
-                }else if(!validateEmail(txtEmail.getText().toString())){
-                    Toast toast=Toast.makeText(getContext(), R.string.invalid_email,Toast.LENGTH_LONG);
-                }else if(txtPassword.getText().toString()!=txtConfirmPassword.getText().toString()){
-                    Toast toast=Toast.makeText(getContext(), R.string.invalid_password,Toast.LENGTH_LONG);
-                }else{
-                    User user=new User(txtName.getText().toString(),txtEmail.getText().toString(),txtPassword.getText().toString(),txtTelephone.getText().toString());
-                    AsyncTask<User,Void,Void> asyncTask=new SaveUserAsync().execute(user);
-                    Toast toast=Toast.makeText(getContext(), R.string.account_created,Toast.LENGTH_LONG);
-                    if(getActivity().getSupportFragmentManager().getBackStackEntryCount() != 0) {
+                TextInputEditText txtName = view.findViewById(R.id.txtName);
+                TextInputEditText txtTelephone = view.findViewById(R.id.txtTelephone);
+                TextInputEditText txtEmail = view.findViewById(R.id.txtEmail);
+
+                if (txtName.getText().toString().equals("") || txtTelephone.getText().toString().equals("") || txtEmail.getText().toString().equals("") ||
+                        txtPassword.getText().toString().equals("") || txtConfirmPassword.getText().toString().equals("")) {
+                    Toast toast = Toast.makeText(getContext(), R.string.fill_all_boxes, Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (!validateTelephone(txtTelephone.getText().toString())) {
+                    Toast toast = Toast.makeText(getContext(), R.string.invalid_telephone, Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (!validateEmail(txtEmail.getText().toString())) {
+                    Toast toast = Toast.makeText(getContext(), R.string.invalid_email, Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (!txtPassword.getText().toString().equals(txtConfirmPassword.getText().toString())) {
+                    Toast toast = Toast.makeText(getContext(), R.string.invalid_password, Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    User user = new User(txtName.getText().toString(), txtEmail.getText().toString(), txtPassword.getText().toString(), txtTelephone.getText().toString());
+                    AsyncTask<User, Void, Void> asyncTask = new SaveUserAsync().execute(user);
+                    Toast toast = Toast.makeText(getContext(), R.string.account_created, Toast.LENGTH_LONG);
+                    toast.show();
+
+                    if (getActivity().getSupportFragmentManager().getBackStackEntryCount() != 0) {
                         getActivity().getSupportFragmentManager().popBackStackImmediate();
                     }
                 }
@@ -86,22 +96,24 @@ public class NewAccountFragment extends Fragment {
         return view;
     }
 
-    private boolean validateTelephone(String telephone){
-        if(!Character.isDigit(telephone.charAt(0)) || telephone.charAt(0)!='+'){
+    private boolean validateTelephone(String telephone) {
+        if (!Character.isDigit(telephone.charAt(0)) && telephone.charAt(0) != '+') {
             return false;
         }
-        for(int index=1;index<telephone.length();index++){
-            if(!Character.isDigit(telephone.charAt(index))){
+
+        for (int index = 1; index < telephone.length(); index++) {
+            if (!Character.isDigit(telephone.charAt(index))) {
                 return false;
             }
         }
+
         return true;
     }
 
-    private boolean validateEmail(String email){
-        final String regex="^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-        Pattern pattern=Pattern.compile(regex);
-        Matcher matcher=pattern.matcher(email);
+    private boolean validateEmail(String email) {
+        final String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
 

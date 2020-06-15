@@ -26,10 +26,10 @@ public class User {
     }
 
     public User() {
-        name = null;
-        email = null;
-        password = null;
-        telephone = null;
+        name = "";
+        email = "";
+        password = "";
+        telephone = "";
     }
 
     public int getId() {

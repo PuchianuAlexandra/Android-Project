@@ -20,7 +20,7 @@ public class LoginFragment extends Fragment {
 
     CheckBox checkSeePassword;
     TextInputEditText txtPassword;
-    Button btnCreateAccount;
+    Button btnAddAccount;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,7 +29,7 @@ public class LoginFragment extends Fragment {
 
         checkSeePassword = view.findViewById(R.id.checkSeePassword);
         txtPassword = view.findViewById(R.id.txtPassword);
-        btnCreateAccount = view.findViewById(R.id.btnCreateAccount);
+        btnAddAccount = view.findViewById(R.id.btnAddAccount);
 
         checkSeePassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -42,7 +42,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        btnCreateAccount.setOnClickListener(new View.OnClickListener() {
+        btnAddAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
