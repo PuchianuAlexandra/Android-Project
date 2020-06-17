@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.android_project_medicinesupply.Database.SaveUserAsync;
 import com.example.android_project_medicinesupply.Database.SelectUserAsync;
 import com.example.android_project_medicinesupply.Database.User;
 import com.example.android_project_medicinesupply.R;
@@ -38,7 +37,9 @@ public class LoginFragment extends Fragment {
 
         checkSeePassword = view.findViewById(R.id.checkSeePassword);
         txtPassword = view.findViewById(R.id.txtPassword);
+        txtEmail = view.findViewById(R.id.txtEmail);
         btnAddAccount = view.findViewById(R.id.btnAddAccount);
+        btnLogIn = view.findViewById(R.id.btnLogin);
 
         checkSeePassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -75,7 +76,7 @@ public class LoginFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                if (user.getId() == 0) {
+                if (user == null) {
                     Toast toast = Toast.makeText(getContext(), R.string.no_user_found, Toast.LENGTH_LONG);
                     toast.show();
                 } else {
@@ -87,5 +88,4 @@ public class LoginFragment extends Fragment {
 
         return view;
     }
-
 }

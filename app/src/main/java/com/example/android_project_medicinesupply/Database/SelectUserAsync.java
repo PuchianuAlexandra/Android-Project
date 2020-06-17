@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 import com.example.android_project_medicinesupply.Utils.AppController;
 
-public class SelectUserAsync extends AsyncTask<String,Void,User>{
+public class SelectUserAsync extends AsyncTask<String,Void,User> {
 
     @Override
     protected User doInBackground(String... params) {
