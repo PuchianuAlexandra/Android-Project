@@ -82,12 +82,6 @@ public class LoginFragment extends Fragment {
                     Toast toast = Toast.makeText(getContext(), R.string.no_user_found, Toast.LENGTH_LONG);
                     toast.show();
                 } else {
-                    Toast toast = Toast.makeText(getContext(), user.getName(), Toast.LENGTH_LONG);
-                    toast.show();
-
-                    /*Bundle bundle = new Bundle();
-                    bundle.putString("email", user.getEmail());*/
-                    //bundle.putString("password", user.getPassword());
                     Intent intent = new Intent(getActivity(), InventoryActivity.class);
                     intent.putExtra("email", user.getEmail());
                     intent.putExtra("password", user.getPassword());

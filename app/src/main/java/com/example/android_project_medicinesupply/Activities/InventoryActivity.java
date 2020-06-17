@@ -1,20 +1,21 @@
 package com.example.android_project_medicinesupply.Activities;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.android_project_medicinesupply.Database.SelectUserAsync;
 import com.example.android_project_medicinesupply.Database.User;
+import com.example.android_project_medicinesupply.Fragments.InventoryFragment;
 import com.example.android_project_medicinesupply.R;
+
+import java.util.concurrent.ExecutionException;
 
 public class InventoryActivity extends AppCompatActivity {
 
     private User user;
-
-   /* public InventoryActivity(User user) {
-        this.user = user;
-    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +25,19 @@ public class InventoryActivity extends AppCompatActivity {
         user = new User();
         String email = getIntent().getStringExtra("email");
         String password = getIntent().getStringExtra("password");
-        user.setEmail(email);
-        user.setPassword(password);
 
-        Toast toast = Toast.makeText(getApplicationContext(), user.getEmail(), Toast.LENGTH_LONG);
-        toast.show();
+        AsyncTask<String, Void, User> asyncTask = new SelectUserAsync().execute(email, password);
+
+        try {
+            user = asyncTask.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragmentFrame, new InventoryFragment(user));
+        transaction.commit();
     }
 }

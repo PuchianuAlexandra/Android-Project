@@ -19,4 +19,8 @@
     <string name="account_created">Account created!</string>
     <string name="fill_all_boxes">You have to fill all the boxes!</string>
     <string name="no_user_found">No user found</string>
+    <string name="add_to_order">Add to order</string>
+    <string name="add_new_medicine">Add new medicine</string>
+    <string name="place_order">Place order</string>
+    <string name="see_user_details">See user details</string>
 </resources>
