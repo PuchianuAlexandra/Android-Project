@@ -3,7 +3,6 @@ package com.example.android_project_medicinesupply.Fragments;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
@@ -87,10 +86,11 @@ public class LoginFragment extends Fragment {
                     toast.show();
 
                     /*Bundle bundle = new Bundle();
-                    bundle.putString("email", user.getEmail());
-                    bundle.putString("password", user.getPassword());*/
+                    bundle.putString("email", user.getEmail());*/
+                    //bundle.putString("password", user.getPassword());
                     Intent intent = new Intent(getActivity(), InventoryActivity.class);
-                    intent.putExtra("user", (Parcelable) user);
+                    intent.putExtra("email", user.getEmail());
+                    intent.putExtra("password", user.getPassword());
                     startActivity(intent);
                 }
             }
