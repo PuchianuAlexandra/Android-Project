@@ -15,7 +15,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:textAllCaps="true"
         android:textStyle="bold"/>
-    
+
     <TextView
         android:id="@+id/txtManufacturer"
         android:layout_width="match_parent"
