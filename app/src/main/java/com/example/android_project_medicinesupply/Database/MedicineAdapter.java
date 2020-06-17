@@ -29,11 +29,15 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        int noPills = medicines.get(position).getNoPills();
+        int concentration = medicines.get(position).getConcentration();
+        double price = medicines.get(position).getPrice();
+
         holder.txtProductName.setText(medicines.get(position).getName());
-        holder.txtManufacturer.setText(medicines.get(position).getManufacturer());
-        holder.txtPills.setText(medicines.get(position).getNoPills());
-        holder.txtConcentration.setText(medicines.get(position).getConcentration());
-        holder.txtPrice.setText(medicines.get(position).getConcentration());
+        holder.txtManufacturer.setText("Manufacturer: " + medicines.get(position).getManufacturer());
+        holder.txtPills.setText(Integer.toString(noPills) + " pills x ");
+        holder.txtConcentration.setText(Integer.toString(concentration) + " mg   ");
+        holder.txtPrice.setText(Double.toString(price) + " lei");
     }
 
     @Override

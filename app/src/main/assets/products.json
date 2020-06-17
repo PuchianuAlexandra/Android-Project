@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Ibuprofen",
     "manufacturer": "AbbVie Deutschland",
-    "no_pills": 30,
+    "noPills": 30,
     "concentration": 400,
     "quantity": 5,
 	"price": 8.10
@@ -12,7 +12,7 @@
     "id": 2,
     "name": "Nurofen",
     "manufacturer": "RECKITT BENCKISER HEALTHCARE",
-    "no_pills": 24,
+    "noPills": 24,
     "concentration": 400,
     "quantity": 5,
 	"price": 22.50
@@ -21,7 +21,7 @@
     "id": 3,
     "name": "Borenar",
     "manufacturer": "Faes Farma S.A.",
-    "no_pills": 10,
+    "noPills": 10,
     "concentration": 20,
     "quantity": 5,
 	"price": 12.13
@@ -30,7 +30,7 @@
     "id": 4,
     "name": "Aspirin",
     "manufacturer": "Bayer Bitterfeld GmbH",
-    "no_pills": 20,
+    "noPills": 20,
     "concentration": 500,
     "quantity": 5,
 	"price": 12
@@ -39,7 +39,7 @@
     "id": 5,
     "name": "Metoclopramid",
     "manufacturer": "S.C. Terapia S.A., Romania",
-    "no_pills": 40,
+    "noPills": 40,
     "concentration": 10,
     "quantity": 5,
 	"price": 9.48

@@ -23,4 +23,8 @@
     <string name="add_new_medicine">Add new medicine</string>
     <string name="place_order">Place order</string>
     <string name="see_user_details">See user details</string>
+    <string name="manufacturer">Manufacturer:</string>
+    <string name="pills">pills x</string>
+    <string name="concentration">mg</string>
+    <string name="price">lei</string>
 </resources>
