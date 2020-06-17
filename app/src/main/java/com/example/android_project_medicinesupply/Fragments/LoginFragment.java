@@ -1,7 +1,9 @@
 package com.example.android_project_medicinesupply.Fragments;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.android_project_medicinesupply.Activities.InventoryActivity;
 import com.example.android_project_medicinesupply.Database.SelectUserAsync;
 import com.example.android_project_medicinesupply.Database.User;
 import com.example.android_project_medicinesupply.R;
@@ -80,8 +83,15 @@ public class LoginFragment extends Fragment {
                     Toast toast = Toast.makeText(getContext(), R.string.no_user_found, Toast.LENGTH_LONG);
                     toast.show();
                 } else {
-                    Toast toast = Toast.makeText(getContext(), user.getName() , Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getContext(), user.getName(), Toast.LENGTH_LONG);
                     toast.show();
+
+                    /*Bundle bundle = new Bundle();
+                    bundle.putString("email", user.getEmail());
+                    bundle.putString("password", user.getPassword());*/
+                    Intent intent = new Intent(getActivity(), InventoryActivity.class);
+                    intent.putExtra("user", (Parcelable) user);
+                    startActivity(intent);
                 }
             }
         });
