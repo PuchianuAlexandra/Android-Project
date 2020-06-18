@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -36,6 +37,7 @@ public class InventoryFragment extends Fragment {
     private MedicineAdapter medicineAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
+    private List<Medicine> orderMedicine;
 
     public InventoryFragment(User user) {
         this.user = user;
@@ -50,6 +52,7 @@ public class InventoryFragment extends Fragment {
         recyclerView = view.findViewById(R.id.medicineRecyclerView);
         populateRecyclerView();
         Button btnAddMedicine = view.findViewById(R.id.btnAddMedicine);
+        orderMedicine = new ArrayList<>();
 
         btnAddMedicine.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +67,9 @@ public class InventoryFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new TouchListener(getContext(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Toast toast = Toast.makeText(getContext(), "Click!", Toast.LENGTH_LONG);
+                Medicine medicine = medicines.get(position);
+                orderMedicine.add(medicine);
+                Toast toast = Toast.makeText(getContext(), medicine.getName() + " " + getString(R.string.add_medicine_to_order), Toast.LENGTH_LONG);
                 toast.show();
             }
         }));

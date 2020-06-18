@@ -31,36 +31,15 @@
         app:layout_constraintHeight_percent="0.60"/>
 
     <Button
-        android:id="@+id/btnAddToOrder"
-        android:layout_width="0dp"
+        android:id="@+id/btnAddMedicine"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="25dp"
         android:layout_marginStart="15dp"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="0dp"
-        app:layout_constraintTop_toBottomOf="@id/medicineRecyclerView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.45"
-        app:layout_constraintHeight_percent="0.075"
-        android:background="@color/colorAccent"
-        android:fontFamily="@font/antic_didone"
-        android:textSize="20sp"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="@string/add_to_order"
-        android:textAllCaps="true"
-        android:textStyle="bold"/>
-
-    <Button
-        android:id="@+id/btnAddMedicine"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginStart="7dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="0dp"
         app:layout_constraintTop_toBottomOf="@id/medicineRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.45"
         app:layout_constraintHeight_percent="0.075"
         android:background="@color/colorAccent"
         android:fontFamily="@font/antic_didone"

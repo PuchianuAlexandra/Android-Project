@@ -35,4 +35,5 @@
     <string name="add_medicine">Add Medicine</string>
     <string name="add_mew_medicine">Add mew medicine</string>
     <string name="medicine_added">Medicine added!</string>
+    <string name="add_medicine_to_order">added!</string>
 </resources>
