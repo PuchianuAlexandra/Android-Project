@@ -19,6 +19,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class InventoryFragment extends Fragment {
@@ -50,6 +52,16 @@ public class InventoryFragment extends Fragment {
         Gson gson = new Gson();
         Type listMedicineType = new TypeToken<List<Medicine>>() { }.getType();
         medicines = gson.fromJson(jsonString, listMedicineType);
+
+        if(medicines.size() > 0) {
+            Collections.sort(medicines, new Comparator<Medicine>() {
+                @Override
+                public int compare(final Medicine o1, final Medicine o2) {
+                    return o1.getName().compareTo(o2.getName());
+                }
+            });
+        }
+
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         medicineAdapter = new MedicineAdapter(medicines);
