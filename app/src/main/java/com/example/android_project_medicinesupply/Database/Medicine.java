@@ -1,8 +1,9 @@
 package com.example.android_project_medicinesupply.Database;
 
-import java.math.BigDecimal;
+import com.google.gson.annotations.Expose;
 
 public class Medicine {
+    @Expose
 
     private int id;
     private String name;

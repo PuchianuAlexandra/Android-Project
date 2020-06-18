@@ -1,27 +1,25 @@
 package com.example.android_project_medicinesupply.Fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.android_project_medicinesupply.R;
 import com.google.android.material.textfield.TextInputEditText;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class NewMedicineFragment extends Fragment {
 
-    public NewMedicineFragment() {
-        // Required empty public constructor
-    }
-
+    private TextInputEditText txtName;
+    private TextInputEditText txtManufacturer;
+    private TextInputEditText txtPills;
+    private TextInputEditText txtConcentration;
+    private TextInputEditText txtPrice;
+    private TextInputEditText txtQuantity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,20 +32,19 @@ public class NewMedicineFragment extends Fragment {
         btnAddMedicine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextInputEditText txtName = view.findViewById(R.id.txtName);
-                TextInputEditText txtManufacturer = view.findViewById(R.id.txtManufacturer);
-                TextInputEditText txtPills = view.findViewById(R.id.txtPills);
-                TextInputEditText txtConcentration = view.findViewById(R.id.txtConcentration);
-                TextInputEditText txtPrice = view.findViewById(R.id.txtPrice);
-                TextInputEditText txtQuantity = view.findViewById(R.id.txtQuantity);
+                txtName = view.findViewById(R.id.txtName);
+                txtManufacturer = view.findViewById(R.id.txtManufacturer);
+                txtPills = view.findViewById(R.id.txtPills);
+                txtConcentration = view.findViewById(R.id.txtConcentration);
+                txtPrice = view.findViewById(R.id.txtPrice);
+                txtQuantity = view.findViewById(R.id.txtQuantity);
 
                 if (txtName.getText().toString().equals("") || txtManufacturer.getText().toString().equals("") || txtPills.getText().toString().equals("")
                         || txtConcentration.getText().toString().equals("") || txtPrice.getText().toString().equals("") || txtQuantity.getText().toString().equals("")) {
                     Toast toast = Toast.makeText(getContext(), R.string.fill_all_boxes, Toast.LENGTH_LONG);
                     toast.show();
                 } else {
-                    Toast toast = Toast.makeText(getContext(), R.string.medicine_added, Toast.LENGTH_LONG);
-                    toast.show();
+
                 }
             }
         });
@@ -63,5 +60,4 @@ public class NewMedicineFragment extends Fragment {
 
         return view;
     }
-
 }

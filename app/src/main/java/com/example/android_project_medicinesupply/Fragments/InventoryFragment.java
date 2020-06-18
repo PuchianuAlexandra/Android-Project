@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,6 +17,8 @@ import com.example.android_project_medicinesupply.Database.Medicine;
 import com.example.android_project_medicinesupply.Database.MedicineAdapter;
 import com.example.android_project_medicinesupply.Database.User;
 import com.example.android_project_medicinesupply.R;
+import com.example.android_project_medicinesupply.Utils.ClickListener;
+import com.example.android_project_medicinesupply.Utils.TouchListener;
 import com.example.android_project_medicinesupply.Utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -57,6 +60,15 @@ public class InventoryFragment extends Fragment {
                 transaction.commit();
             }
         });
+
+        recyclerView.addOnItemTouchListener(new TouchListener(getContext(), recyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Toast toast = Toast.makeText(getContext(), "Click!", Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }));
+
         return view;
     }
 
