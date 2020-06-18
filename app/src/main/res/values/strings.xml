@@ -27,4 +27,11 @@
     <string name="pills">pills x</string>
     <string name="concentration">mg</string>
     <string name="price">lei</string>
+    <string name="hint_manufacturer">Manufacturer</string>
+    <string name="hint_no_pills">Number of pills</string>
+    <string name="hint_concentration">Concentration</string>
+    <string name="hint_price">Price</string>
+    <string name="hint_quantity">Quantity</string>
+    <string name="add_medicine">Add Medicine</string>
+    <string name="add_mew_medicine">Add mew medicine</string>
 </resources>
