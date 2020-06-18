@@ -36,4 +36,7 @@
     <string name="add_mew_medicine">Add mew medicine</string>
     <string name="medicine_added">Medicine added!</string>
     <string name="add_medicine_to_order">added!</string>
+    <string name="click_on_item_to_delete">(*Click on item to delete!)</string>
+    <string name="your_products">Your products</string>
+    <string name="place_order">Place order</string>
 </resources>

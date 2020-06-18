@@ -52,6 +52,7 @@ public class InventoryFragment extends Fragment {
         recyclerView = view.findViewById(R.id.medicineRecyclerView);
         populateRecyclerView();
         Button btnAddMedicine = view.findViewById(R.id.btnAddMedicine);
+        Button btnPlaceOrder = view.findViewById(R.id.btnPlaceOrder);
         orderMedicine = new ArrayList<>();
 
         btnAddMedicine.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +74,16 @@ public class InventoryFragment extends Fragment {
                 toast.show();
             }
         }));
+
+        btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragmentFrame, new OrderFragment(user, orderMedicine));
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
 
         return view;
     }
