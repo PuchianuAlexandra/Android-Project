@@ -8,9 +8,10 @@ import java.util.List;
 
 @Dao
 public interface MedicineOrderDao {
+
     @Insert
-    void insertMedicineOrder(MedicineOrder medicineOrder);
+    public void insertMedicineOrder(MedicineOrder medicineOrder);
 
     @Query("SELECT * FROM MedicineOrder WHERE idOrder=:idOrder")
-    List<MedicineOrder> selectMedicines(int idOrder);
+    public List<MedicineOrder> selectMedicines(int idOrder);
 }

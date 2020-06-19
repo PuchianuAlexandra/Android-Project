@@ -21,11 +21,9 @@ public class InventoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
-
         user = new User();
         String email = getIntent().getStringExtra("email");
         String password = getIntent().getStringExtra("password");
-
         AsyncTask<String, Void, User> asyncTask = new SelectUserByEmailAndPasswordAsync().execute(email, password);
 
         try {

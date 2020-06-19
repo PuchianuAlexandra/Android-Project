@@ -10,11 +10,11 @@ import java.util.List;
 public interface OrderDao {
 
     @Insert
-    void insertOrder(Order order);
+    public void insertOrder(Order order);
 
     @Query("SELECT * FROM Orders")
-    List<Order> selectOrders();
+    public List<Order> selectOrders();
 
     @Query("SELECT id FROM Orders ORDER BY id DESC LIMIT 1")
-    int selectLastOrder();
+    public int selectLastOrder();
 }

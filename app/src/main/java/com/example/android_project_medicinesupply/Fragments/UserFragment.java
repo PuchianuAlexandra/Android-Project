@@ -19,22 +19,25 @@ import com.example.android_project_medicinesupply.R;
 public class UserFragment extends Fragment {
 
     private User user;
+    private TextView txtUserName;
+    private TextView txtTelephone;
+    private TextView txtEmail;
+    private Button btnCancel;
+    private Button btnOrderHistory;
 
     public UserFragment(User user) {
         this.user = user;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
-        TextView txtUserName = view.findViewById(R.id.txtUserName);
-        TextView txtTelephone = view.findViewById(R.id.txtTelephone);
-        TextView txtEmail = view.findViewById(R.id.txtEmail);
-        Button btnCancel = view.findViewById(R.id.btnCancel);
-        Button btnOrderHistory = view.findViewById(R.id.btnOrderHistory);
-
+        txtUserName = view.findViewById(R.id.txtUserName);
+        txtTelephone = view.findViewById(R.id.txtTelephone);
+        txtEmail = view.findViewById(R.id.txtEmail);
+        btnCancel = view.findViewById(R.id.btnCancel);
+        btnOrderHistory = view.findViewById(R.id.btnOrderHistory);
         txtUserName.setText(user.getName());
         txtTelephone.setText("Telephone: " + user.getTelephone());
         txtEmail.setText("Email: " + user.getEmail());

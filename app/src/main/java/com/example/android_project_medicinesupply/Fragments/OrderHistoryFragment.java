@@ -26,6 +26,7 @@ public class OrderHistoryFragment extends Fragment {
     private RecyclerView recyclerView;
     private OrderAdapter orderAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private Button btnCancel;
 
     public OrderHistoryFragment(User user) {
         this.user = user;
@@ -36,7 +37,7 @@ public class OrderHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order_history, container, false);
         recyclerView = view.findViewById(R.id.ordersRecyclerView);
-        Button btnCancel = view.findViewById(R.id.btnCancel);
+        btnCancel = view.findViewById(R.id.btnCancel);
 
         try {
             populateRecyclerView();

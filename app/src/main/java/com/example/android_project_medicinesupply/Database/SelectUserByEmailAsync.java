@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import com.example.android_project_medicinesupply.Utils.AppController;
 
 public class SelectUserByEmailAsync extends AsyncTask<String, Void, User> {
+
     @Override
     protected User doInBackground(String... strings) {
         User user = AppController.getInstance().getDatabaseInstance().userDao().selectUserByEmail(strings[0]);

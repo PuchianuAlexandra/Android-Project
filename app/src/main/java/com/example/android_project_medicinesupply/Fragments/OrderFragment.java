@@ -38,6 +38,8 @@ public class OrderFragment extends Fragment {
     private RecyclerView recyclerView;
     private MedicineAdapter medicineAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private Button btnCancel;
+    private Button btnOrder;
 
     public OrderFragment(User user, List<Medicine> medicines) {
         this.user = user;
@@ -48,9 +50,8 @@ public class OrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order, container, false);
-        Button btnCancel = view.findViewById(R.id.btnCancel);
-        Button btnOrder = view.findViewById(R.id.btnOrder);
-
+        btnCancel = view.findViewById(R.id.btnCancel);
+        btnOrder = view.findViewById(R.id.btnOrder);
         recyclerView = view.findViewById(R.id.orderRecyclerView);
         populateRecyclerView();
 
@@ -59,7 +60,6 @@ public class OrderFragment extends Fragment {
             public void onClick(View view, int position) {
                 Toast toast = Toast.makeText(getContext(), medicines.get(position).getName().toString() + " " + getString(R.string.deleted), Toast.LENGTH_LONG);
                 toast.show();
-
                 medicines.remove(position);
                 populateRecyclerView();
             }
@@ -77,38 +77,43 @@ public class OrderFragment extends Fragment {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Order order = new Order(user.getId());
-                AsyncTask<Order, Void, Integer> insertAsyncTask = new InsertOrderAsync().execute(order);
-
-                try {
-                    order.setId(insertAsyncTask.get());
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                for(Medicine medicine : medicines) {
-                    AsyncTask<Integer, Void, Medicine> asyncTask = new SelectMedicineAsync().execute(medicine.getId());
+                if (medicines.size() > 0) {
+                    Order order = new Order(user.getId());
+                    AsyncTask<Order, Void, Integer> insertAsyncTask = new InsertOrderAsync().execute(order);
 
                     try {
-                        medicine = asyncTask.get();
+                        order.setId(insertAsyncTask.get());
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
 
-                    MedicineOrder medicineOrder = new MedicineOrder(order.getId(), medicine.getId());
-                    new InsertMedicineOrderAsync().execute(medicineOrder);
-                    new UpdateQuantityAsync().execute(medicine);
-                }
+                    for (Medicine medicine : medicines) {
+                        AsyncTask<Integer, Void, Medicine> asyncTask = new SelectMedicineAsync().execute(medicine.getId());
 
-                Toast toast = Toast.makeText(getContext(), getString(R.string.order_placed), Toast.LENGTH_LONG);
-                toast.show();
+                        try {
+                            medicine = asyncTask.get();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
 
-                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() != 0) {
-                    getActivity().getSupportFragmentManager().popBackStackImmediate();
+                        MedicineOrder medicineOrder = new MedicineOrder(order.getId(), medicine.getId());
+                        new InsertMedicineOrderAsync().execute(medicineOrder);
+                        new UpdateQuantityAsync().execute(medicine);
+                    }
+
+                    Toast toast = Toast.makeText(getContext(), getString(R.string.order_placed), Toast.LENGTH_LONG);
+                    toast.show();
+
+                    if (getActivity().getSupportFragmentManager().getBackStackEntryCount() != 0) {
+                        getActivity().getSupportFragmentManager().popBackStackImmediate();
+                    }
+                } else {
+                    Toast toast = Toast.makeText(getContext(), R.string.empty_order, Toast.LENGTH_LONG);
+                    toast.show();
                 }
             }
         });
@@ -117,7 +122,7 @@ public class OrderFragment extends Fragment {
     }
 
     private void populateRecyclerView() {
-        if(medicines.size() > 0) {
+        if (medicines.size() > 0) {
             Collections.sort(medicines, new Comparator<Medicine>() {
                 @Override
                 public int compare(final Medicine o1, final Medicine o2) {

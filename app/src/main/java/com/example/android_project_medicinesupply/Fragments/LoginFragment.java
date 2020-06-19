@@ -36,7 +36,6 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
         checkSeePassword = view.findViewById(R.id.checkSeePassword);
         txtPassword = view.findViewById(R.id.txtPassword);
         txtEmail = view.findViewById(R.id.txtEmail);

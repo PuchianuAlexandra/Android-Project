@@ -26,17 +26,25 @@ import java.util.regex.Pattern;
 
 public class NewAccountFragment extends Fragment {
 
-    TextInputEditText txtPassword;
-    TextInputEditText txtConfirmPassword;
+    private TextInputEditText txtPassword;
+    private TextInputEditText txtConfirmPassword;
+    private TextInputEditText txtName;
+    private TextInputEditText txtTelephone;
+    private TextInputEditText txtEmail;
+    private Button btnCreateAccount;
+    private Button btnCancel;
+    private CheckBox seePassword;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        final View view = inflater.inflate(R.layout.fragment_new_account, container, false);
-        Button btnCreateAccount = view.findViewById(R.id.btnCreateAccount);
-        Button btnCancel = view.findViewById(R.id.btnCancel);
-        CheckBox seePassword = view.findViewById(R.id.checkSeePassword);
+        View view = inflater.inflate(R.layout.fragment_new_account, container, false);
+        btnCreateAccount = view.findViewById(R.id.btnCreateAccount);
+        btnCancel = view.findViewById(R.id.btnCancel);
+        seePassword = view.findViewById(R.id.checkSeePassword);
+        txtName = view.findViewById(R.id.txtName);
+        txtTelephone = view.findViewById(R.id.txtTelephone);
+        txtEmail = view.findViewById(R.id.txtEmail);
         txtPassword = view.findViewById(R.id.txtPassword);
         txtConfirmPassword = view.findViewById(R.id.txtConfirmPassword);
 
@@ -52,10 +60,6 @@ public class NewAccountFragment extends Fragment {
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextInputEditText txtName = view.findViewById(R.id.txtName);
-                TextInputEditText txtTelephone = view.findViewById(R.id.txtTelephone);
-                TextInputEditText txtEmail = view.findViewById(R.id.txtEmail);
-
                 if (txtName.getText().toString().equals("") || txtTelephone.getText().toString().equals("") || txtEmail.getText().toString().equals("") ||
                         txtPassword.getText().toString().equals("") || txtConfirmPassword.getText().toString().equals("")) {
                     Toast toast = Toast.makeText(getContext(), R.string.fill_all_boxes, Toast.LENGTH_LONG);
@@ -66,7 +70,7 @@ public class NewAccountFragment extends Fragment {
                 } else if (!validateEmail(txtEmail.getText().toString())) {
                     Toast toast = Toast.makeText(getContext(), R.string.invalid_email, Toast.LENGTH_LONG);
                     toast.show();
-                }else if(existingEmail(txtEmail.getText().toString())){
+                } else if (existingEmail(txtEmail.getText().toString())) {
                     Toast toast = Toast.makeText(getContext(), R.string.existing_email, Toast.LENGTH_LONG);
                     toast.show();
                 } else if (!txtPassword.getText().toString().equals(txtConfirmPassword.getText().toString())) {
@@ -98,6 +102,7 @@ public class NewAccountFragment extends Fragment {
                 }
             }
         });
+
         return view;
     }
 
@@ -125,6 +130,7 @@ public class NewAccountFragment extends Fragment {
     private boolean existingEmail(String email) {
         User user = null;
         AsyncTask<String, Void, User> userAsyncTask = new SelectUserByEmailAsync().execute(email);
+
         try {
             user = userAsyncTask.get();
         } catch (ExecutionException e) {
@@ -139,6 +145,4 @@ public class NewAccountFragment extends Fragment {
             return true;
         }
     }
-
-
 }

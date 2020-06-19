@@ -44,4 +44,6 @@
     <string name="order_history">Order History</string>
     <string name="orders">Orders</string>
     <string name="existing_email">User with the same email already exists</string>
+    <string name="user">\"User: \"</string>
+    <string name="empty_order">You have to order something!</string>
 </resources>

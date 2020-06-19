@@ -19,11 +19,11 @@ public class ReportsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reports);
-
         User user = new User();
         String email = getIntent().getStringExtra("email");
         String password = getIntent().getStringExtra("password");
         AsyncTask<String, Void, User> userAsyncTask = new SelectUserByEmailAndPasswordAsync().execute(email, password);
+
         try {
             user = userAsyncTask.get();
         } catch (ExecutionException e) {
@@ -31,7 +31,6 @@ public class ReportsActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.fragmentFrame, new UserFragment(user));

@@ -23,25 +23,26 @@ public class NewMedicineFragment extends Fragment {
     private TextInputEditText txtConcentration;
     private TextInputEditText txtPrice;
     private TextInputEditText txtQuantity;
+    private Button btnAddMedicine;
+    private Button btnCancel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_new_medicine, container, false);
-        Button btnAddMedicine = view.findViewById(R.id.btnAddMedicine);
-        Button btnCancel = view.findViewById(R.id.btnCancel);
+        View view = inflater.inflate(R.layout.fragment_new_medicine, container, false);
+        btnAddMedicine = view.findViewById(R.id.btnAddMedicine);
+        btnCancel = view.findViewById(R.id.btnCancel);
+        txtName = view.findViewById(R.id.txtName);
+        txtManufacturer = view.findViewById(R.id.txtManufacturer);
+        txtPills = view.findViewById(R.id.txtPills);
+        txtConcentration = view.findViewById(R.id.txtConcentration);
+        txtPrice = view.findViewById(R.id.txtPrice);
+        txtQuantity = view.findViewById(R.id.txtQuantity);
 
         btnAddMedicine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtName = view.findViewById(R.id.txtName);
-                txtManufacturer = view.findViewById(R.id.txtManufacturer);
-                txtPills = view.findViewById(R.id.txtPills);
-                txtConcentration = view.findViewById(R.id.txtConcentration);
-                txtPrice = view.findViewById(R.id.txtPrice);
-                txtQuantity = view.findViewById(R.id.txtQuantity);
-
                 if (txtName.getText().toString().equals("") || txtManufacturer.getText().toString().equals("") || txtPills.getText().toString().equals("")
                         || txtConcentration.getText().toString().equals("") || txtPrice.getText().toString().equals("") || txtQuantity.getText().toString().equals("")) {
                     Toast toast = Toast.makeText(getContext(), R.string.fill_all_boxes, Toast.LENGTH_LONG);

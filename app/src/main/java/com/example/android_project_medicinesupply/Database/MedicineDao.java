@@ -8,15 +8,16 @@ import java.util.List;
 
 @Dao
 public interface MedicineDao {
+
     @Insert
-    void insertMedicine(Medicine medicine);
+    public void insertMedicine(Medicine medicine);
 
     @Query("UPDATE Medicine SET quantity=:quantity WHERE id=:id")
-    void updateQuantity(int quantity, int id);
+    public void updateQuantity(int quantity, int id);
 
     @Query("SELECT * FROM Medicine WHERE id=:idMedicine")
-    Medicine selectMedicine(int idMedicine);
+    public Medicine selectMedicine(int idMedicine);
 
     @Query("SELECT * FROM Medicine")
-    List<Medicine> selectAllMedicines();
+    public List<Medicine> selectAllMedicines();
 }

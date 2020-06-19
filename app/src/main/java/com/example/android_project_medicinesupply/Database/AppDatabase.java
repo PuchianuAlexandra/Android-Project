@@ -7,7 +7,15 @@ import androidx.room.RoomDatabase;
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
+
     public abstract MedicineDao medicineDao();
+
     public abstract OrderDao orderDao();
+
     public abstract MedicineOrderDao medicineOrderDao();
 }
+
+
+
+
+

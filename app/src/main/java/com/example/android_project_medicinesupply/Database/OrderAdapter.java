@@ -57,7 +57,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             e.printStackTrace();
         }
 
-        for(MedicineOrder medicineOrder : medicineOrderList) {
+        for (MedicineOrder medicineOrder : medicineOrderList) {
             Medicine medicine = new Medicine();
 
             try {

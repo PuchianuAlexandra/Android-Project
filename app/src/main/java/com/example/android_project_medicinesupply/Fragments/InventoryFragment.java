@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android_project_medicinesupply.Activities.InventoryActivity;
 import com.example.android_project_medicinesupply.Activities.ReportsActivity;
 import com.example.android_project_medicinesupply.Database.InsertMedicineAsync;
 import com.example.android_project_medicinesupply.Database.Medicine;
@@ -45,7 +44,9 @@ public class InventoryFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
     private List<Medicine> orderMedicine;
-
+    private Button btnAddMedicine;
+    private Button btnPlaceOrder;
+    private Button btnDetails;
 
     public InventoryFragment(User user) {
         this.user = user;
@@ -55,8 +56,11 @@ public class InventoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_inventory, container, false);
+        btnAddMedicine = view.findViewById(R.id.btnAddMedicine);
+        btnPlaceOrder = view.findViewById(R.id.btnPlaceOrder);
+        btnDetails = view.findViewById(R.id.btnSeeDetails);
         txtName = view.findViewById(R.id.txtName);
-        txtName.setText("User: " + user.getName());
+        txtName.setText(getString(R.string.user) + " " + user.getName());
         recyclerView = view.findViewById(R.id.medicineRecyclerView);
         AsyncTask<Void, Void, List<Medicine>> asyncTask = new SelectAllMedicinesAsync().execute();
 
@@ -71,11 +75,8 @@ public class InventoryFragment extends Fragment {
         if (medicines.size() == 0) {
             getMedicineFromJson();
         }
-        populateRecyclerView();
 
-        Button btnAddMedicine = view.findViewById(R.id.btnAddMedicine);
-        Button btnPlaceOrder = view.findViewById(R.id.btnPlaceOrder);
-        Button btnDetails = view.findViewById(R.id.btnSeeDetails);
+        populateRecyclerView();
         orderMedicine = new ArrayList<>();
 
         btnAddMedicine.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +118,7 @@ public class InventoryFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
         return view;
     }
 

@@ -18,7 +18,6 @@ public class AppController extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         controller = this;
         database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "app_database").build();
     }
