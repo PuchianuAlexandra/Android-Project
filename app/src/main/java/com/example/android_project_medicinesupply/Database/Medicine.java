@@ -1,13 +1,25 @@
 package com.example.android_project_medicinesupply.Database;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Medicine {
 
+    @PrimaryKey(autoGenerate = true)
     private int id;
+    @ColumnInfo(name = "name")
     private String name;
+    @ColumnInfo(name = "manufacturer")
     private String manufacturer;
+    @ColumnInfo(name = "noPills")
     private int noPills;
+    @ColumnInfo(name = "concentration")
     private int concentration;
+    @ColumnInfo(name = "quantity")
     private int quantity;
+    @ColumnInfo(name = "price")
     private double price;
 
     public Medicine(int id, String name, String manufacturer, int noPills, int concentration, int quantity, double price) {

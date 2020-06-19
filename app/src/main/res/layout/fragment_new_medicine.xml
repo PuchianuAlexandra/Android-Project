@@ -172,6 +172,7 @@
             android:fontFamily="@font/antic_didone"
             android:textSize="22sp"
             android:textStyle="bold"
+            android:inputType="number"
             android:textColor="@color/colorPrimaryDark"/>
     </com.google.android.material.textfield.TextInputLayout>
 
