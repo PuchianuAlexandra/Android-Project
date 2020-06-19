@@ -13,7 +13,7 @@ public interface OrderDao {
     void insertOrder(Order order);
 
     @Query("SELECT * FROM Orders")
-    List<Order> selectOrder();
+    List<Order> selectOrders();
 
     @Query("SELECT id FROM Orders ORDER BY id DESC LIMIT 1")
     int selectLastOrder();

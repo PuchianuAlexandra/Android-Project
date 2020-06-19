@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android_project_medicinesupply.R;
-import com.example.android_project_medicinesupply.Utils.AppController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -39,8 +38,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         Order order = orders.get(position);
 
         try {
-            User user = new SelectUserByIdAsync().execute(order.getId()).get();
-            holder.txtUser.setText(user.getName());
+            User user = new SelectUserByIdAsync().execute(order.getUserId()).get();
+            holder.txtUser.setText("User: " + user.getName());
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -48,10 +47,27 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         }
 
         List<Medicine> medicines = new ArrayList<>();
-        List<MedicineOrder> medicineOrderList = AppController.getInstance().getDatabaseInstance().medicineOrderDao().selectMedicines(order.getId());
+        List<MedicineOrder> medicineOrderList = new ArrayList<>();
+
+        try {
+            medicineOrderList = new SelectMedicineOrderAsync().execute(order.getId()).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         for(MedicineOrder medicineOrder : medicineOrderList) {
-            Medicine medicine = AppController.getInstance().getDatabaseInstance().medicineDao().selectMedicine(medicineOrder.getIdMedicine());
+            Medicine medicine = new Medicine();
+
+            try {
+                medicine = new SelectMedicineAsync().execute(medicineOrder.getIdMedicine()).get();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             medicines.add(medicine);
         }
 
