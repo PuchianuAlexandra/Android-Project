@@ -4,8 +4,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.List;
-
 @Entity(tableName = "Orders")
 public class Order {
 
@@ -19,8 +17,7 @@ public class Order {
         userId = 0;
     }
 
-    public Order(int id, int userId, List<Medicine> medicines) {
-        this.id = id;
+    public Order(int userId) {
         this.userId = userId;
     }
 

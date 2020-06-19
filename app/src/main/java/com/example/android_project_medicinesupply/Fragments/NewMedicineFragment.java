@@ -53,6 +53,10 @@ public class NewMedicineFragment extends Fragment {
                     AsyncTask<Medicine, Void, Void> asyncTask = new InsertMedicineAsync().execute(medicine);
                     Toast toast = Toast.makeText(getContext(), R.string.medicine_added, Toast.LENGTH_LONG);
                     toast.show();
+
+                    if (getActivity().getSupportFragmentManager().getBackStackEntryCount() != 0) {
+                        getActivity().getSupportFragmentManager().popBackStackImmediate();
+                    }
                 }
             }
         });

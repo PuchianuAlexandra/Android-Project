@@ -40,4 +40,5 @@
     <string name="place_order">Place order</string>
     <string name="deleted">deleted!</string>
     <string name="click_on_item_to_add">(*Click on item to add)</string>
+    <string name="order_placed">Order placed!</string>
 </resources>

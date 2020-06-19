@@ -14,8 +14,7 @@ public class MedicineOrder {
     @ColumnInfo(name = "idMedicine")
     private int idMedicine;
 
-    public MedicineOrder(int id, int idOrder, int idMedicine) {
-        this.id = id;
+    public MedicineOrder(int idOrder, int idMedicine) {
         this.idOrder = idOrder;
         this.idMedicine = idMedicine;
     }

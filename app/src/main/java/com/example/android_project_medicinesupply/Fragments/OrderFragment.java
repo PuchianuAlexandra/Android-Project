@@ -1,5 +1,6 @@
 package com.example.android_project_medicinesupply.Fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android_project_medicinesupply.Database.InsertMedicineOrderAsync;
+import com.example.android_project_medicinesupply.Database.InsertOrderAsync;
 import com.example.android_project_medicinesupply.Database.Medicine;
 import com.example.android_project_medicinesupply.Database.MedicineAdapter;
+import com.example.android_project_medicinesupply.Database.MedicineOrder;
+import com.example.android_project_medicinesupply.Database.Order;
+import com.example.android_project_medicinesupply.Database.SelectMedicineAsync;
+import com.example.android_project_medicinesupply.Database.UpdateQuantityAsync;
 import com.example.android_project_medicinesupply.Database.User;
 import com.example.android_project_medicinesupply.R;
 import com.example.android_project_medicinesupply.Utils.ClickListener;
@@ -21,6 +28,7 @@ import com.example.android_project_medicinesupply.Utils.TouchListener;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class OrderFragment extends Fragment {
@@ -41,6 +49,7 @@ public class OrderFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order, container, false);
         Button btnCancel = view.findViewById(R.id.btnCancel);
+        Button btnOrder = view.findViewById(R.id.btnOrder);
 
         recyclerView = view.findViewById(R.id.orderRecyclerView);
         populateRecyclerView();
@@ -64,6 +73,46 @@ public class OrderFragment extends Fragment {
                 }
             }
         });
+
+        btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Order order = new Order(user.getId());
+                AsyncTask<Order, Void, Integer> insertAsyncTask = new InsertOrderAsync().execute(order);
+
+                try {
+                    order.setId(insertAsyncTask.get());
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                for(Medicine medicine : medicines) {
+                    AsyncTask<Integer, Void, Medicine> asyncTask = new SelectMedicineAsync().execute(medicine.getId());
+
+                    try {
+                        medicine = asyncTask.get();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    MedicineOrder medicineOrder = new MedicineOrder(order.getId(), medicine.getId());
+                    new InsertMedicineOrderAsync().execute(medicineOrder);
+                    new UpdateQuantityAsync().execute(medicine);
+                }
+
+                Toast toast = Toast.makeText(getContext(), getString(R.string.order_placed), Toast.LENGTH_LONG);
+                toast.show();
+
+                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() != 0) {
+                    getActivity().getSupportFragmentManager().popBackStackImmediate();
+                }
+            }
+        });
+
         return view;
     }
 
