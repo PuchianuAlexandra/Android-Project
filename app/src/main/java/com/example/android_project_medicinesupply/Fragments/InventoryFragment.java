@@ -1,5 +1,6 @@
 package com.example.android_project_medicinesupply.Fragments;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android_project_medicinesupply.Activities.InventoryActivity;
+import com.example.android_project_medicinesupply.Activities.ReportsActivity;
 import com.example.android_project_medicinesupply.Database.InsertMedicineAsync;
 import com.example.android_project_medicinesupply.Database.Medicine;
 import com.example.android_project_medicinesupply.Database.MedicineAdapter;
@@ -72,6 +75,7 @@ public class InventoryFragment extends Fragment {
 
         Button btnAddMedicine = view.findViewById(R.id.btnAddMedicine);
         Button btnPlaceOrder = view.findViewById(R.id.btnPlaceOrder);
+        Button btnDetails = view.findViewById(R.id.btnSeeDetails);
         orderMedicine = new ArrayList<>();
 
         btnAddMedicine.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +108,15 @@ public class InventoryFragment extends Fragment {
             }
         });
 
+        btnDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ReportsActivity.class);
+                intent.putExtra("email", user.getEmail());
+                intent.putExtra("password", user.getPassword());
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

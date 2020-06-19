@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.InventoryActivity"></activity>
+        <activity android:name=".Activities.ReportsActivity"></activity>
+        <activity android:name=".Activities.InventoryActivity" />
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
