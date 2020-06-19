@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.android_project_medicinesupply.Database.SelectUserByEmailAsync;
+import com.example.android_project_medicinesupply.Database.SelectUserByEmailAndPasswordAsync;
 import com.example.android_project_medicinesupply.Database.User;
 import com.example.android_project_medicinesupply.Fragments.UserFragment;
 import com.example.android_project_medicinesupply.R;
@@ -23,7 +23,7 @@ public class ReportsActivity extends AppCompatActivity {
         User user = new User();
         String email = getIntent().getStringExtra("email");
         String password = getIntent().getStringExtra("password");
-        AsyncTask<String, Void, User> userAsyncTask = new SelectUserByEmailAsync().execute(email, password);
+        AsyncTask<String, Void, User> userAsyncTask = new SelectUserByEmailAndPasswordAsync().execute(email, password);
         try {
             user = userAsyncTask.get();
         } catch (ExecutionException e) {

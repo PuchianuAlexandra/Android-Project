@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +36,7 @@ public class OrderHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order_history, container, false);
         recyclerView = view.findViewById(R.id.ordersRecyclerView);
+        Button btnCancel = view.findViewById(R.id.btnCancel);
 
         try {
             populateRecyclerView();
@@ -43,6 +45,15 @@ public class OrderHistoryFragment extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() != 0) {
+                    getActivity().getSupportFragmentManager().popBackStackImmediate();
+                }
+            }
+        });
 
         return view;
     }

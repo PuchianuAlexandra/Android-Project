@@ -15,10 +15,12 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.android_project_medicinesupply.Database.SaveUserAsync;
+import com.example.android_project_medicinesupply.Database.SelectUserByEmailAsync;
 import com.example.android_project_medicinesupply.Database.User;
 import com.example.android_project_medicinesupply.R;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,12 +33,12 @@ public class NewAccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final View view=inflater.inflate(R.layout.fragment_new_account, container, false);
-        Button btnCreateAccount=view.findViewById(R.id.btnCreateAccount);
-        Button btnCancel=view.findViewById(R.id.btnCancel);
-        CheckBox seePassword=view.findViewById(R.id.checkSeePassword);
-        txtPassword=view.findViewById(R.id.txtPassword);
-        txtConfirmPassword=view.findViewById(R.id.txtConfirmPassword);
+        final View view = inflater.inflate(R.layout.fragment_new_account, container, false);
+        Button btnCreateAccount = view.findViewById(R.id.btnCreateAccount);
+        Button btnCancel = view.findViewById(R.id.btnCancel);
+        CheckBox seePassword = view.findViewById(R.id.checkSeePassword);
+        txtPassword = view.findViewById(R.id.txtPassword);
+        txtConfirmPassword = view.findViewById(R.id.txtConfirmPassword);
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +66,9 @@ public class NewAccountFragment extends Fragment {
                 } else if (!validateEmail(txtEmail.getText().toString())) {
                     Toast toast = Toast.makeText(getContext(), R.string.invalid_email, Toast.LENGTH_LONG);
                     toast.show();
+                }else if(existingEmail(txtEmail.getText().toString())){
+                    Toast toast = Toast.makeText(getContext(), R.string.existing_email, Toast.LENGTH_LONG);
+                    toast.show();
                 } else if (!txtPassword.getText().toString().equals(txtConfirmPassword.getText().toString())) {
                     Toast toast = Toast.makeText(getContext(), R.string.invalid_password, Toast.LENGTH_LONG);
                     toast.show();
@@ -84,7 +89,7 @@ public class NewAccountFragment extends Fragment {
         seePassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     txtPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     txtConfirmPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else {
@@ -115,6 +120,24 @@ public class NewAccountFragment extends Fragment {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+    private boolean existingEmail(String email) {
+        User user = null;
+        AsyncTask<String, Void, User> userAsyncTask = new SelectUserByEmailAsync().execute(email);
+        try {
+            user = userAsyncTask.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (user == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 
