@@ -22,8 +22,7 @@ public class Medicine {
     @ColumnInfo(name = "price")
     private double price;
 
-    public Medicine(int id, String name, String manufacturer, int noPills, int concentration, int quantity, double price) {
-        this.id = id;
+    public Medicine(String name, String manufacturer, int noPills, int concentration, int quantity, double price) {
         this.name = name;
         this.manufacturer = manufacturer;
         this.noPills = noPills;

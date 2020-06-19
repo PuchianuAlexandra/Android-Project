@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "Orders")
@@ -14,18 +13,15 @@ public class Order {
     private int id;
     @ColumnInfo(name = "user")
     private int userId;
-    private List<Medicine> medicines;
 
     public Order() {
         id = 0;
         userId = 0;
-        medicines = new ArrayList<>();
     }
 
     public Order(int id, int userId, List<Medicine> medicines) {
         this.id = id;
         this.userId = userId;
-        this.medicines = medicines;
     }
 
     public int getId() {
@@ -42,13 +38,5 @@ public class Order {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public List<Medicine> getMedicines() {
-        return medicines;
-    }
-
-    public void setMedicines(List<Medicine> medicines) {
-        this.medicines = medicines;
     }
 }

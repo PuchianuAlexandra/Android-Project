@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/txtProductName"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
@@ -14,6 +14,18 @@
         android:textSize="20sp"
         android:textColor="@color/colorPrimaryDark"
         android:textAllCaps="true"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/txtQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/antic_didone"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_toRightOf="@+id/txtProductName"
         android:textStyle="bold"/>
 
     <TextView

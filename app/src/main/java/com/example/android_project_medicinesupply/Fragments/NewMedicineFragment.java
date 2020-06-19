@@ -1,5 +1,6 @@
 package com.example.android_project_medicinesupply.Fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.android_project_medicinesupply.Database.InsertMedicineAsync;
+import com.example.android_project_medicinesupply.Database.Medicine;
 import com.example.android_project_medicinesupply.R;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -44,7 +47,12 @@ public class NewMedicineFragment extends Fragment {
                     Toast toast = Toast.makeText(getContext(), R.string.fill_all_boxes, Toast.LENGTH_LONG);
                     toast.show();
                 } else {
-
+                    Medicine medicine = new Medicine(txtName.getText().toString(), txtManufacturer.getText().toString(),
+                            Integer.parseInt(txtPills.getText().toString()), Integer.parseInt(txtConcentration.getText().toString()),
+                            Integer.parseInt(txtQuantity.getText().toString()), Double.parseDouble(txtPrice.getText().toString()));
+                    AsyncTask<Medicine, Void, Void> asyncTask = new InsertMedicineAsync().execute(medicine);
+                    Toast toast = Toast.makeText(getContext(), R.string.medicine_added, Toast.LENGTH_LONG);
+                    toast.show();
                 }
             }
         });
