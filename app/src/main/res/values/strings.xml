@@ -38,4 +38,6 @@
     <string name="click_on_item_to_delete">(*Click on item to delete!)</string>
     <string name="your_products">Your products</string>
     <string name="place_order">Place order</string>
+    <string name="deleted">deleted!</string>
+    <string name="click_on_item_to_add">(*Click on item to add)</string>
 </resources>
