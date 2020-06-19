@@ -1,5 +1,6 @@
 package com.example.android_project_medicinesupply.Fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android_project_medicinesupply.Database.InsertMedicineAsync;
 import com.example.android_project_medicinesupply.Database.Medicine;
 import com.example.android_project_medicinesupply.Database.MedicineAdapter;
+import com.example.android_project_medicinesupply.Database.SelectAllMedicinesAsync;
 import com.example.android_project_medicinesupply.Database.User;
 import com.example.android_project_medicinesupply.R;
 import com.example.android_project_medicinesupply.Utils.ClickListener;
@@ -28,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class InventoryFragment extends Fragment {
 
@@ -38,6 +42,7 @@ public class InventoryFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
     private List<Medicine> orderMedicine;
+
 
     public InventoryFragment(User user) {
         this.user = user;
@@ -50,7 +55,21 @@ public class InventoryFragment extends Fragment {
         txtName = view.findViewById(R.id.txtName);
         txtName.setText("User: " + user.getName());
         recyclerView = view.findViewById(R.id.medicineRecyclerView);
+        AsyncTask<Void, Void, List<Medicine>> asyncTask = new SelectAllMedicinesAsync().execute();
+
+        try {
+            medicines = asyncTask.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (medicines.size() == 0) {
+            getMedicineFromJson();
+        }
         populateRecyclerView();
+
         Button btnAddMedicine = view.findViewById(R.id.btnAddMedicine);
         Button btnPlaceOrder = view.findViewById(R.id.btnPlaceOrder);
         orderMedicine = new ArrayList<>();
@@ -89,12 +108,7 @@ public class InventoryFragment extends Fragment {
     }
 
     private void populateRecyclerView() {
-        String jsonString = Utils.getJsonFromAssets(getContext(), "products.json");
-        Gson gson = new Gson();
-        Type listMedicineType = new TypeToken<List<Medicine>>() { }.getType();
-        medicines = gson.fromJson(jsonString, listMedicineType);
-
-        if(medicines.size() > 0) {
+        if (medicines.size() > 0) {
             Collections.sort(medicines, new Comparator<Medicine>() {
                 @Override
                 public int compare(final Medicine o1, final Medicine o2) {
@@ -107,5 +121,19 @@ public class InventoryFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         medicineAdapter = new MedicineAdapter(medicines);
         recyclerView.setAdapter(medicineAdapter);
+
     }
+
+    private void getMedicineFromJson() {
+        String jsonString = Utils.getJsonFromAssets(getContext(), "products.json");
+        Gson gson = new Gson();
+        Type listMedicineType = new TypeToken<List<Medicine>>() {
+        }.getType();
+        medicines = gson.fromJson(jsonString, listMedicineType);
+
+        for (Medicine medicine : medicines) {
+            AsyncTask<Medicine, Void, Void> asyncTask = new InsertMedicineAsync().execute(medicine);
+        }
+    }
+
 }
