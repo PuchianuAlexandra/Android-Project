@@ -11,5 +11,8 @@ public interface UserDao {
     void insertUser(User user);
 
     @Query("SELECT * FROM user WHERE email = :email AND password = :password")
-    User selectUser(String email, String password);
+    User selectUserByEmail(String email, String password);
+
+    @Query("SELECT * FROM user WHERE  id = :id")
+    User selectUserById(int id);
 }

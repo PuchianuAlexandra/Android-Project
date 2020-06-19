@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.android_project_medicinesupply.Activities.InventoryActivity;
-import com.example.android_project_medicinesupply.Database.SelectUserAsync;
+import com.example.android_project_medicinesupply.Database.SelectUserByEmailAsync;
 import com.example.android_project_medicinesupply.Database.User;
 import com.example.android_project_medicinesupply.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -68,7 +68,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 User user = new User();
-                AsyncTask<String, Void, User> asyncTask = new SelectUserAsync().execute(txtEmail.getText().toString(), txtPassword.getText().toString());
+                AsyncTask<String, Void, User> asyncTask = new SelectUserByEmailAsync().execute(txtEmail.getText().toString(), txtPassword.getText().toString());
 
                 try {
                     user = asyncTask.get();
