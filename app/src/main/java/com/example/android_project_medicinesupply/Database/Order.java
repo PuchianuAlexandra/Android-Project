@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(tableName = "Orders")
 public class Order {
 
     @PrimaryKey(autoGenerate = true)
